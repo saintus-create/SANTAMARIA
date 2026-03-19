@@ -1,6 +1,5 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import {
   Table,
   TableBody,
@@ -81,11 +80,11 @@ const fig6Data = [
 
 function SectionHeading({ children, number }: { children: React.ReactNode; number: string }) {
   return (
-    <div className="mt-16 mb-8 flex items-center gap-4">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold text-lg">
-        {number}
+    <div className="mt-16 mb-8 flex items-center gap-4 border-b border-slate-200 pb-2">
+      <div className="text-lg font-medium text-slate-400">
+        {number.padStart(2, '0')}
       </div>
-      <h2 className="text-2xl font-bold tracking-tight text-foreground">
+      <h2 className="text-2xl font-semibold text-slate-900">
         {children}
       </h2>
     </div>
@@ -102,19 +101,29 @@ function FigureCard({
   children: React.ReactNode;
 }) {
   return (
-    <Card className="my-8 border-border shadow-sm overflow-hidden bg-card">
-      <CardHeader className="bg-muted/30 border-b pb-4">
-        <CardTitle className="text-sm font-bold uppercase tracking-wider text-foreground">
+    <Card className="my-8 border border-slate-200 rounded-none bg-white">
+      <CardHeader className="bg-slate-50 border-b border-slate-200 pb-4 pt-4">
+        <CardTitle className="text-sm font-medium text-slate-900">
           {title}
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-6">
         {children}
-        <p className="text-xs text-muted-foreground mt-6 pt-4 border-t leading-relaxed">
+        <p className="text-xs text-slate-500 mt-6 pt-4 border-t border-slate-100 leading-relaxed">
           {note}
         </p>
       </CardContent>
     </Card>
+  );
+}
+
+function HighlightCard({ num, title, desc }: { num: string, title: string, desc: string }) {
+  return (
+    <div className="flex flex-col gap-2 p-6 border border-slate-200 bg-white rounded-none">
+      <div className="text-4xl font-light text-slate-300 mb-2">{num}</div>
+      <h3 className="text-base font-semibold text-slate-900">{title}</h3>
+      <p className="text-sm text-slate-600 leading-relaxed">{desc}</p>
+    </div>
   );
 }
 
@@ -123,17 +132,17 @@ const dollarK = (v: number) => `$${(v / 1000).toFixed(0)}K`;
 
 export default function ReportPage() {
   return (
-    <div className="min-h-screen bg-background font-sans selection:bg-primary/20">
+    <div className="min-h-screen bg-white font-sans selection:bg-slate-200">
       {/* Sticky Navbar */}
-      <nav className="sticky top-0 z-50 w-full bg-[#111827] text-white border-b border-slate-800 shadow-sm backdrop-blur-md bg-opacity-95">
+      <nav className="sticky top-0 z-50 w-full bg-[#0f172a] text-white border-b border-slate-800 backdrop-blur-md bg-opacity-95">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <ShieldAlert className="w-5 h-5 text-red-500" />
-            <span className="font-semibold tracking-wide text-sm sm:text-base">Pro Se Research Report</span>
+            <ShieldAlert className="w-5 h-5 text-slate-400" />
+            <span className="font-medium text-sm sm:text-base">Pro Se Research Report</span>
           </div>
           <div className="flex items-center gap-4">
-            <span className="hidden sm:inline-block text-slate-400 text-xs tracking-wider uppercase font-medium">Reference: SBC-VAWA-2026-01</span>
-            <Badge variant="outline" className="border-slate-700 text-slate-300 bg-slate-800/50 hover:bg-slate-800 rounded-sm px-2">
+            <span className="hidden sm:inline-block text-slate-400 text-xs font-medium">Reference: SBC-VAWA-2026-01</span>
+            <Badge variant="outline" className="border-slate-700 text-slate-300 bg-slate-800/50 hover:bg-slate-800 rounded-none px-2 font-medium">
               March 2026
             </Badge>
           </div>
@@ -141,25 +150,22 @@ export default function ReportPage() {
       </nav>
 
       {/* Hero Section */}
-      <header className="bg-slate-900 text-white pt-20 pb-24 px-6 border-b border-slate-800 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=2400&auto=format&fit=crop')] bg-cover bg-center opacity-[0.07] mix-blend-luminosity"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
-        
+      <header className="bg-[#0f172a] text-white pt-24 pb-32 px-6 border-b border-slate-800 relative">
         <div className="max-w-4xl mx-auto relative z-10">
-          <div className="flex flex-wrap gap-2 mb-6">
-            <Badge className="bg-red-600 hover:bg-red-700 text-white border-none rounded-sm px-3 py-1 text-xs uppercase tracking-wider font-bold">Investigative Report</Badge>
-            <Badge className="bg-slate-800 text-slate-300 border-slate-700 rounded-sm px-3 py-1 text-xs uppercase tracking-wider">Santa Barbara County, CA</Badge>
+          <div className="flex flex-wrap gap-2 mb-8">
+            <Badge className="bg-slate-800 text-white border border-slate-700 rounded-none px-3 py-1 text-xs font-medium">Investigative Report</Badge>
+            <Badge className="bg-slate-800 text-slate-300 border border-slate-700 rounded-none px-3 py-1 text-xs font-medium">Santa Barbara County, CA</Badge>
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6 tracking-tight text-white">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] mb-6 text-white">
             VAWA STOP Formula Grant Funding in Santa Barbara County
           </h1>
           
-          <p className="text-xl md:text-2xl text-slate-300 font-light leading-relaxed mb-8 max-w-3xl">
+          <p className="text-xl md:text-2xl text-slate-400 font-light leading-relaxed mb-10 max-w-3xl">
             Federal Appropriation, State Distribution, and Local Service Delivery Outcomes: Tracing federal VAWA funds from appropriation to local delivery, Fiscal Years 2021–2024.
           </p>
 
-          <div className="flex items-center gap-4 text-sm text-slate-400 border-t border-slate-800 pt-6 mt-8">
+          <div className="flex items-center gap-4 text-sm text-slate-500 border-t border-slate-800 pt-6">
             <div className="flex items-center gap-2">
               <FileText className="w-4 h-4" />
               <span>Publicly Available Primary Source Records</span>
@@ -169,79 +175,104 @@ export default function ReportPage() {
       </header>
 
       {/* Key Stats Grid */}
-      <div className="max-w-5xl mx-auto px-6 -mt-10 relative z-20">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <Card className="bg-white shadow-md border-border">
-            <CardContent className="p-5 flex flex-col items-start gap-2">
-              <div className="p-2 bg-blue-50 rounded-md text-blue-700 mb-1">
-                <ArrowUpRight className="w-5 h-5" />
-              </div>
-              <p className="text-sm font-medium text-muted-foreground">CA Award (FY23)</p>
-              <p className="text-2xl sm:text-3xl font-bold text-foreground">$16.1M</p>
-            </CardContent>
-          </Card>
+      <div className="max-w-5xl mx-auto px-6 -mt-16 relative z-20">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-0 border border-slate-200 bg-white">
+          <div className="p-6 border-b border-r border-slate-200 flex flex-col gap-3">
+            <ArrowUpRight className="w-6 h-6 text-blue-600" />
+            <div>
+              <p className="text-sm font-medium text-slate-500">CA Award (FY23)</p>
+              <p className="text-2xl sm:text-3xl font-bold text-slate-900">$16.1M</p>
+            </div>
+          </div>
           
-          <Card className="bg-white shadow-md border-border">
-            <CardContent className="p-5 flex flex-col items-start gap-2">
-              <div className="p-2 bg-red-50 rounded-md text-red-600 mb-1">
-                <TrendingUp className="w-5 h-5" />
-              </div>
-              <p className="text-sm font-medium text-muted-foreground">Weapons Increase</p>
-              <p className="text-2xl sm:text-3xl font-bold text-destructive">148%</p>
-            </CardContent>
-          </Card>
+          <div className="p-6 border-b border-r border-slate-200 flex flex-col gap-3">
+            <TrendingUp className="w-6 h-6 text-red-600" />
+            <div>
+              <p className="text-sm font-medium text-slate-500">Weapons Increase</p>
+              <p className="text-2xl sm:text-3xl font-bold text-slate-900">148%</p>
+            </div>
+          </div>
 
-          <Card className="bg-white shadow-md border-border">
-            <CardContent className="p-5 flex flex-col items-start gap-2">
-              <div className="p-2 bg-slate-100 rounded-md text-slate-700 mb-1">
-                <Ban className="w-5 h-5" />
-              </div>
-              <p className="text-sm font-medium text-muted-foreground">SMPD Allocation</p>
-              <p className="text-2xl sm:text-3xl font-bold text-foreground">$0</p>
-            </CardContent>
-          </Card>
+          <div className="p-6 border-b border-slate-200 md:border-r-0 md:border-b flex flex-col gap-3">
+            <Ban className="w-6 h-6 text-slate-500" />
+            <div>
+              <p className="text-sm font-medium text-slate-500">SMPD Allocation</p>
+              <p className="text-2xl sm:text-3xl font-bold text-slate-900">$0</p>
+            </div>
+          </div>
 
-          <Card className="bg-white shadow-md border-border">
-            <CardContent className="p-5 flex flex-col items-start gap-2">
-              <div className="p-2 bg-orange-50 rounded-md text-orange-600 mb-1">
-                <PieChart className="w-5 h-5" />
-              </div>
-              <p className="text-sm font-medium text-muted-foreground">DVS Overhead</p>
-              <p className="text-2xl sm:text-3xl font-bold text-foreground">43%</p>
-            </CardContent>
-          </Card>
+          <div className="p-6 border-r border-slate-200 flex flex-col gap-3">
+            <PieChart className="w-6 h-6 text-orange-600" />
+            <div>
+              <p className="text-sm font-medium text-slate-500">DVS Overhead</p>
+              <p className="text-2xl sm:text-3xl font-bold text-slate-900">43%</p>
+            </div>
+          </div>
 
-          <Card className="bg-white shadow-md border-border">
-            <CardContent className="p-5 flex flex-col items-start gap-2">
-              <div className="p-2 bg-red-50 rounded-md text-red-600 mb-1">
-                <Ban className="w-5 h-5" />
-              </div>
-              <p className="text-sm font-medium text-muted-foreground">FY21-23 LE Funding</p>
-              <p className="text-2xl sm:text-3xl font-bold text-destructive">$0</p>
-            </CardContent>
-          </Card>
+          <div className="p-6 border-r border-slate-200 flex flex-col gap-3">
+            <Ban className="w-6 h-6 text-red-600" />
+            <div>
+              <p className="text-sm font-medium text-slate-500">FY21-23 LE Funding</p>
+              <p className="text-2xl sm:text-3xl font-bold text-slate-900">$0</p>
+            </div>
+          </div>
 
-          <Card className="bg-white shadow-md border-border">
-            <CardContent className="p-5 flex flex-col items-start gap-2">
-              <div className="p-2 bg-green-50 rounded-md text-green-700 mb-1">
-                <FileText className="w-5 h-5" />
-              </div>
-              <p className="text-sm font-medium text-muted-foreground">FY24 Confirmed Grants</p>
-              <p className="text-2xl sm:text-3xl font-bold text-foreground">4</p>
-            </CardContent>
-          </Card>
+          <div className="p-6 flex flex-col gap-3">
+            <FileText className="w-6 h-6 text-green-700" />
+            <div>
+              <p className="text-sm font-medium text-slate-500">FY24 Confirmed Grants</p>
+              <p className="text-2xl sm:text-3xl font-bold text-slate-900">4</p>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Main Content Area */}
-      <main className="max-w-3xl mx-auto px-6 py-16 pb-24 space-y-12 text-slate-800">
+      <main className="max-w-4xl mx-auto px-6 py-16 pb-24 text-slate-800">
         
         {/* Abstract/Intro Callout */}
-        <div className="text-lg leading-relaxed font-medium text-slate-700 bg-slate-50 p-6 sm:p-8 rounded-lg border-l-4 border-slate-900">
+        <div className="text-lg leading-relaxed font-medium text-slate-800 mb-16">
           <p>
             The Violence Against Women Act (VAWA) established the STOP Formula Grant Program as the primary federal mechanism for improving law enforcement and prosecution response to domestic violence. This report examines the flow of these funds from federal appropriation through the California Office of Emergency Services (Cal OES) to Santa Barbara County subrecipients for fiscal years 2021 through 2024.
           </p>
         </div>
+
+        {/* Report Highlights Section */}
+        <section className="mb-20">
+          <h2 className="text-2xl font-semibold text-slate-900 mb-8 pb-2 border-b border-slate-200">Report Highlights</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <HighlightCard 
+              num="01" 
+              title="Significant Federal Funding" 
+              desc="California received approximately $49 million in STOP funds over four years, with $16.1M in FY 2023 alone." 
+            />
+            <HighlightCard 
+              num="02" 
+              title="Weapons Escalation" 
+              desc="Weapons-involved domestic violence calls countywide increased 148 percent from 370 in 2013 to 918 in 2022." 
+            />
+            <HighlightCard 
+              num="03" 
+              title="Zero SMPD Allocation" 
+              desc="The Santa Maria Police Department received no confirmed VAWA allocation in any fiscal year reviewed." 
+            />
+            <HighlightCard 
+              num="04" 
+              title="High Administrative Overhead" 
+              desc="Primary service provider reports 43% management and general overhead, more than double industry standards." 
+            />
+            <HighlightCard 
+              num="05" 
+              title="No County Subrecipients Found" 
+              desc="FY 2021–2023: No SB County LE, prosecution, or court agency appeared in any STOP subrecipient list." 
+            />
+            <HighlightCard 
+              num="06" 
+              title="Fund Consolidation Issues" 
+              desc="State administration consolidates multiple federal funding streams into single subawards, obscuring STOP allocations." 
+            />
+          </div>
+        </section>
 
         {/* Section 1 */}
         <section>
@@ -253,7 +284,7 @@ export default function ReportPage() {
             <p>
               This analysis is based exclusively on verified primary source records, including Cal OES subrecipient ledgers, DOJ OVW grant award database records, Santa Barbara County Board of Supervisors consent agendas, DVS organizational financial statements, and CA DOJ Domestic Violence-Related Calls for Service data.
             </p>
-            <p className="font-semibold text-slate-900">
+            <p className="font-semibold text-slate-900 mt-4">
               The report addresses a single operative question: did the funding distributed through these channels produce, in Santa Barbara County, the trained law enforcement officers, specialized prosecutors, and supported courts that VAWA's statutory design required?
             </p>
           </div>
@@ -277,8 +308,8 @@ export default function ReportPage() {
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
                 <XAxis dataKey="label" tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} dy={10} />
                 <YAxis tickFormatter={dollarM} tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} dx={-10} />
-                <Tooltip cursor={{ fill: 'hsl(var(--muted)/0.5)' }} formatter={(v: number) => [`$${v.toFixed(1)}M`, "Award Amount"]} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
-                <Bar dataKey="amount" radius={[4, 4, 0, 0]}>
+                <Tooltip cursor={{ fill: 'hsl(var(--muted)/0.5)' }} formatter={(v: number) => [`$${v.toFixed(1)}M`, "Award Amount"]} contentStyle={{ borderRadius: '0px', border: '1px solid hsl(var(--border))', boxShadow: 'none' }} />
+                <Bar dataKey="amount" radius={[0, 0, 0, 0]}>
                   {fig1Data.map((_, i) => (
                     <Cell
                       key={i}
@@ -296,7 +327,7 @@ export default function ReportPage() {
             </p>
           </div>
 
-          <div className="my-8 border rounded-lg overflow-hidden shadow-sm">
+          <div className="my-8 border border-slate-200">
             <Table>
               <TableHeader className="bg-slate-50">
                 <TableRow>
@@ -314,13 +345,13 @@ export default function ReportPage() {
                   ["Victim Services", "30%", "~$11,100,000", "Nonprofit and government victim programs"],
                 ].map(([cat, pct, amt, rec], i) => (
                   <TableRow key={i} className="hover:bg-slate-50/50">
-                    <TableCell className="font-medium">{cat}</TableCell>
+                    <TableCell className="font-medium text-slate-900">{cat}</TableCell>
                     <TableCell>{pct}</TableCell>
                     <TableCell className="font-mono text-slate-600">{amt}</TableCell>
-                    <TableCell className="text-muted-foreground">{rec}</TableCell>
+                    <TableCell className="text-slate-500">{rec}</TableCell>
                   </TableRow>
                 ))}
-                <TableRow className="bg-slate-100 font-semibold border-t-2 border-slate-200">
+                <TableRow className="bg-slate-50 font-semibold border-t border-slate-200">
                   <TableCell>Subtotal — Local Agencies</TableCell>
                   <TableCell>85%</TableCell>
                   <TableCell className="font-mono">~$31,450,000</TableCell>
@@ -330,17 +361,17 @@ export default function ReportPage() {
                   <TableCell>State Administration</TableCell>
                   <TableCell>10% (capped)</TableCell>
                   <TableCell className="font-mono text-slate-600">~$3,700,000</TableCell>
-                  <TableCell className="text-muted-foreground">Cal OES overhead</TableCell>
+                  <TableCell className="text-slate-500">Cal OES overhead</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Discretionary</TableCell>
                   <TableCell>5%</TableCell>
                   <TableCell className="font-mono text-slate-600">~$1,850,000</TableCell>
-                  <TableCell className="text-muted-foreground">At-large state allocation</TableCell>
+                  <TableCell className="text-slate-500">At-large state allocation</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
-            <div className="bg-slate-50 px-4 py-2 text-xs text-slate-500 border-t">
+            <div className="bg-slate-50 px-4 py-3 text-xs text-slate-500 border-t border-slate-200">
               Source: 34 U.S.C. § 10461 et seq.; 28 C.F.R. § 90.17. Figures based on approximately $49 million cumulative California STOP award, FY 2021–2023.
             </div>
           </div>
@@ -355,9 +386,9 @@ export default function ReportPage() {
             </p>
           </div>
 
-          <blockquote className="my-8 border-l-4 border-slate-900 bg-slate-50 p-6 rounded-r-lg shadow-sm text-slate-800 italic text-lg leading-relaxed">
+          <blockquote className="my-8 border-l-2 border-slate-900 bg-slate-50 p-6 text-slate-800 italic text-lg leading-relaxed">
             "Even if Santa Barbara County received STOP funds, they would be concealed inside larger victim services grants labeled only by program name, not funding source. This is the structural basis for the opacity documented in this report."
-            <footer className="text-sm font-semibold text-slate-600 mt-3 not-italic">— DOJ OIG Audit 25-038 Context</footer>
+            <footer className="text-sm font-semibold text-slate-600 mt-4 not-italic">— DOJ OIG Audit 25-038 Context</footer>
           </blockquote>
 
           <div className="prose prose-slate max-w-none text-base leading-relaxed">
@@ -388,8 +419,8 @@ export default function ReportPage() {
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
                 <XAxis dataKey="label" tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }} interval={0} angle={-30} textAnchor="end" axisLine={false} tickLine={false} dy={5} />
                 <YAxis tickFormatter={dollarK} tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} dx={-10} />
-                <Tooltip cursor={{ fill: 'hsl(var(--muted)/0.5)' }} formatter={(v: number) => [`$${v.toLocaleString()}`, "Award Amount"]} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
-                <Bar dataKey="amount" radius={[4, 4, 0, 0]}>
+                <Tooltip cursor={{ fill: 'hsl(var(--muted)/0.5)' }} formatter={(v: number) => [`$${v.toLocaleString()}`, "Award Amount"]} contentStyle={{ borderRadius: '0px', border: '1px solid hsl(var(--border))', boxShadow: 'none' }} />
+                <Bar dataKey="amount" radius={[0, 0, 0, 0]}>
                   {fig2Data.map((d, i) => (
                     <Cell
                       key={i}
@@ -401,7 +432,7 @@ export default function ReportPage() {
             </ResponsiveContainer>
           </FigureCard>
 
-          <div className="my-8 border rounded-lg overflow-hidden shadow-sm">
+          <div className="my-8 border border-slate-200">
             <Table>
               <TableHeader className="bg-slate-50">
                 <TableRow>
@@ -422,12 +453,12 @@ export default function ReportPage() {
                     <TableCell className="font-mono text-xs">{id}</TableCell>
                     <TableCell>{cat}</TableCell>
                     <TableCell>{rec}</TableCell>
-                    <TableCell className="font-mono font-medium text-right">{amt}</TableCell>
+                    <TableCell className="font-mono font-medium text-right text-slate-900">{amt}</TableCell>
                   </TableRow>
                 ))}
-                <TableRow className="bg-slate-100 font-semibold border-t-2 border-slate-200">
+                <TableRow className="bg-slate-50 font-semibold border-t border-slate-200">
                   <TableCell colSpan={3}>Total — Confirmed Primary Source Amounts</TableCell>
-                  <TableCell className="font-mono text-right">$2,211,211</TableCell>
+                  <TableCell className="font-mono text-right text-slate-900">$2,211,211</TableCell>
                 </TableRow>
                 
                 {/* Gap Rows */}
@@ -436,14 +467,14 @@ export default function ReportPage() {
                   ["SB Superior Court — confirmed STOP court set-aside", "$0"],
                   ["Direct survivor financial assistance — confirmed allocation", "$0"],
                 ].map(([label, amt], i) => (
-                  <TableRow key={`gap-${i}`} className="bg-red-50/50 hover:bg-red-50">
-                    <TableCell colSpan={3} className="text-red-700 font-medium">{label}</TableCell>
-                    <TableCell className="font-mono font-bold text-red-700 text-right">{amt}</TableCell>
+                  <TableRow key={`gap-${i}`} className="bg-slate-100 hover:bg-slate-100/80">
+                    <TableCell colSpan={3} className="text-slate-600 font-medium">{label}</TableCell>
+                    <TableCell className="font-mono font-bold text-slate-600 text-right">{amt}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-            <div className="bg-slate-50 px-4 py-2 text-xs text-slate-500 border-t">
+            <div className="bg-slate-50 px-4 py-3 text-xs text-slate-500 border-t border-slate-200">
               Source: SB County Board of Supervisors consent agendas; Cal OES Subrecipient Media Ledger; DOJ OVW Grant Award Search.
             </div>
           </div>
@@ -470,17 +501,17 @@ export default function ReportPage() {
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
                 <XAxis dataKey="label" tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} dy={15} />
                 <YAxis tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} dx={-10} />
-                <Tooltip cursor={{ fill: 'hsl(var(--muted)/0.5)' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                <Tooltip cursor={{ fill: 'hsl(var(--muted)/0.5)' }} contentStyle={{ borderRadius: '0px', border: '1px solid hsl(var(--border))', boxShadow: 'none' }} />
                 <Legend wrapperStyle={{ paddingTop: '20px' }} />
-                <Bar dataKey="year2013" name="2013" fill="hsl(var(--chart-4))" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="year2022" name="2022" fill="hsl(var(--chart-3))" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="year2013" name="2013" fill="hsl(var(--chart-4))" radius={[0, 0, 0, 0]} />
+                <Bar dataKey="year2022" name="2022" fill="hsl(var(--chart-3))" radius={[0, 0, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </FigureCard>
 
-          <blockquote className="my-8 border-l-4 border-slate-900 bg-slate-50 p-6 rounded-r-lg shadow-sm text-slate-800 italic text-lg leading-relaxed">
+          <blockquote className="my-8 border-l-2 border-slate-900 bg-slate-50 p-6 text-slate-800 italic text-lg leading-relaxed">
             Domestic violence is "the most predictable homicide in Santa Barbara County... if crime is predictable it is preventable."
-            <footer className="text-sm font-semibold text-slate-600 mt-3 not-italic">— District Attorney Joyce Dudley, 2017</footer>
+            <footer className="text-sm font-semibold text-slate-600 mt-4 not-italic">— District Attorney Joyce Dudley, 2017</footer>
           </blockquote>
         </section>
 
@@ -506,17 +537,17 @@ export default function ReportPage() {
                   { label: "DOJ OVW\n(Federal)", amount: "$175.8M", shade: "bg-slate-900 text-white" },
                   { label: "Cal OES\n(State)", amount: "$16.1M", shade: "bg-slate-800 text-white" },
                   { label: "CA POST\n(Training)", amount: "$4.0M", shade: "bg-slate-700 text-white" },
-                  { label: "SDRTC\n(Fiscal Agent)", amount: "$415,523", shade: "bg-slate-300 text-slate-900" },
-                  { label: "Performa Labs\n(Portal)", amount: "Not public", shade: "bg-slate-200 text-slate-700" },
-                  { label: "SB County Officer\n(End User)", amount: "$0 confirmed", shade: "bg-red-100 text-red-700 border-2 border-red-300" },
+                  { label: "SDRTC\n(Fiscal Agent)", amount: "$415,523", shade: "bg-slate-200 text-slate-900" },
+                  { label: "Performa Labs\n(Portal)", amount: "Not public", shade: "bg-slate-100 text-slate-700" },
+                  { label: "SB County Officer\n(End User)", amount: "$0 confirmed", shade: "bg-white text-slate-500 border border-slate-300" },
                 ].map((node, i, arr) => (
                   <div key={i} className="flex items-center flex-1">
-                    <div className={`flex-1 rounded-md p-3 text-center text-sm shadow-sm ${node.shade}`}>
-                      <div className="font-bold whitespace-pre-line leading-tight mb-2">{node.label}</div>
-                      <div className="font-mono text-xs opacity-90">{node.amount}</div>
+                    <div className={`flex-1 p-4 text-center text-sm ${node.shade}`}>
+                      <div className="font-medium whitespace-pre-line leading-tight mb-2">{node.label}</div>
+                      <div className="font-mono text-xs opacity-80">{node.amount}</div>
                     </div>
                     {i < arr.length - 1 && (
-                      <div className="text-slate-400 font-bold px-2 flex-shrink-0">→</div>
+                      <div className="text-slate-300 font-bold px-3 flex-shrink-0">→</div>
                     )}
                   </div>
                 ))}
@@ -557,7 +588,7 @@ export default function ReportPage() {
                     <Cell key={i} fill={fig5Colors[i]} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(v: number) => [`${v}%`, ""]} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                <Tooltip formatter={(v: number) => [`${v}%`, ""]} contentStyle={{ borderRadius: '0px', border: '1px solid hsl(var(--border))', boxShadow: 'none' }} />
                 <Legend verticalAlign="bottom" height={36}/>
               </PieChart>
             </ResponsiveContainer>
@@ -585,19 +616,19 @@ export default function ReportPage() {
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
                 <XAxis dataKey="label" tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} dy={10} />
                 <YAxis tickFormatter={dollarK} tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }} axisLine={false} tickLine={false} dx={-10} />
-                <Tooltip cursor={{ fill: 'hsl(var(--muted)/0.5)' }} formatter={(v: number) => [`$${v.toLocaleString()}`, ""]} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                <Tooltip cursor={{ fill: 'hsl(var(--muted)/0.5)' }} formatter={(v: number) => [`$${v.toLocaleString()}`, ""]} contentStyle={{ borderRadius: '0px', border: '1px solid hsl(var(--border))', boxShadow: 'none' }} />
                 <Legend wrapperStyle={{ paddingTop: '20px' }} />
-                <Bar dataKey="required" name="Proportionate Statutory Req." fill="hsl(var(--chart-4))" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="confirmed" name="Confirmed FY2024 Receipt" fill="hsl(var(--chart-1))" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="required" name="Proportionate Statutory Req." fill="hsl(var(--chart-4))" radius={[0, 0, 0, 0]} />
+                <Bar dataKey="confirmed" name="Confirmed FY2024 Receipt" fill="hsl(var(--chart-1))" radius={[0, 0, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </FigureCard>
         </section>
 
         {/* Primary Sources */}
-        <div className="mt-20 pt-10 border-t-2 border-slate-200">
-          <h3 className="text-xl font-bold tracking-tight text-slate-900 mb-6 uppercase">Primary Sources Index</h3>
-          <ul className="space-y-4 text-sm text-slate-600 bg-slate-50 p-6 rounded-lg border border-slate-200">
+        <div className="mt-24 pt-12 border-t border-slate-200">
+          <h3 className="text-xl font-semibold text-slate-900 mb-6">Primary Sources Index</h3>
+          <div className="grid gap-4">
             {[
               ["Cal OES Subrecipient Media Ledger", "Lists STOP $16,104,812 and SASP $2,648,245; names SDRTC as statewide T/TA recipient; lists VV and LE grant numbers for SB County."],
               ["DOJ OVW Grant Award Search", "Confirms California formula awards under CFDA #16.588; confirms grant ST24 01 1515 to SDRTC at $415,523."],
@@ -609,23 +640,27 @@ export default function ReportPage() {
               ["Santa Maria Sun, October 4, 2017 (Joe Payne)", "Confirms DA Dudley statements; SMPD Sgt. Streker on-record daily call volume; three 2017 homicides."],
               ["28 C.F.R. § 90.17", "STOP program administrative requirements including subgrantee monitoring and record maintenance obligations."],
             ].map(([title, desc], i) => (
-              <li key={i} className="pl-4 relative before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-slate-400 before:rounded-full">
-                <strong className="text-slate-900 font-semibold">{title}</strong> — <span className="text-slate-600">{desc}</span>
-              </li>
+              <div key={i} className="flex gap-4 p-4 border border-slate-200 bg-white">
+                <div className="text-slate-400 font-mono text-sm mt-0.5">{(i + 1).toString().padStart(2, '0')}</div>
+                <div>
+                  <div className="font-medium text-slate-900 mb-1">{title}</div>
+                  <div className="text-sm text-slate-600 leading-relaxed">{desc}</div>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#111827] text-slate-400 py-12 border-t border-slate-800">
+      <footer className="bg-[#0f172a] text-slate-400 py-12 border-t border-slate-800">
         <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
           <div className="flex items-center gap-2">
             <ShieldAlert className="w-5 h-5 text-slate-500" />
-            <span className="font-semibold text-slate-300">Pro Se Research</span>
+            <span className="font-medium text-slate-300">Pro Se Research</span>
           </div>
           <div className="text-center md:text-right">
-            <p className="mb-1">Report Reference: <span className="text-slate-300 font-mono">SBC-VAWA-2026-01</span></p>
+            <p className="mb-1">Report Reference: <span className="text-slate-300">SBC-VAWA-2026-01</span></p>
             <p className="text-xs opacity-75">All figures confirmed from primary source documents. Estimates explicitly flagged.</p>
           </div>
         </div>
