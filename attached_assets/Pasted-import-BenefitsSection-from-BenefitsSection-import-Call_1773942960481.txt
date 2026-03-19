@@ -1,0 +1,84 @@
+import { BenefitsSection } from "./BenefitsSection";
+import { CallToActionSection } from "./CallToActionSection";
+import { FeaturesOverviewSection } from "./FeaturesOverviewSection";
+import { FooterSection } from "./FooterSection";
+import { HeaderSection } from "./HeaderSection";
+import { HeroSection } from "./HeroSection";
+import { HowItWorksSection } from "./HowItWorksSection";
+import { TestimonialsSection } from "./TestimonialsSection";
+import container8 from "./container-8.svg";
+import vector8 from "./vector-8.svg";
+
+export const Container = (): JSX.Element => {
+  return (
+    <div className="w-[390px] h-[6880px] flex flex-col">
+      <div className="grid flex-1 max-h-16 relative grid-cols-[118px_minmax(0,1fr)] grid-rows-[64px] w-[390px] h-16 gap-2 px-4 py-0 bg-[#212121]">
+        <img
+          className="relative row-[1_/_2] col-[1_/_2] w-full h-full object-cover"
+          alt="Container"
+          src={container8}
+        />
+
+        <div className="relative row-[1_/_2] col-[2_/_3] w-full h-full flex items-center justify-end gap-[9px]">
+          <div className="inline-flex min-h-[34px] items-center justify-center pt-[5.02px] pb-[5.98px] px-3 relative flex-[0_0_auto] bg-[#f9f9f9] rounded-[33554400px]">
+            <div className="relative flex items-center justify-center w-fit mt-[-1.00px] [font-family:'Inter-Medium',Helvetica] font-medium text-[#0d0d0d] text-[13.3px] text-center tracking-[-0.14px] leading-[23.0px] whitespace-nowrap">
+              Download for macOS*
+            </div>
+          </div>
+
+          <div className="inline-flex min-h-9 px-0 py-2 flex-[0_0_auto] bg-[#212121] rounded-[33554400px] aspect-[1] items-center justify-center relative">
+            <div className="inline-flex items-center justify-center px-2 py-0 relative flex-[0_0_auto]">
+              <div className="relative w-5 h-5">
+                <div className="w-full h-full flex">
+                  <img
+                    className="flex-1 w-[16.33px]"
+                    alt="Vector"
+                    src={vector8}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex flex-1 max-h-[6294.79px] relative flex-col w-[390px] items-start pt-0 pb-32 px-0">
+        <HowItWorksSection />
+        <TestimonialsSection />
+        <HeaderSection />
+        <CallToActionSection />
+        <FeaturesOverviewSection />
+        <HeroSection />
+        <BenefitsSection />
+      </div>
+
+      <FooterSection />
+    </div>
+  );
+};
+
+
+
+
+
+
+import { CallToActionFooterSection } from "./CallToActionFooterSection";
+import { PostsContentRegionSection } from "./PostsContentRegionSection";
+import { PostsFilterNavSection } from "./PostsFilterNavSection";
+import { PostsListSection } from "./PostsListSection";
+
+export const Main = (): JSX.Element => {
+  return (
+    <div className="flex flex-col w-[1888px] items-center pt-16 pb-[90px] px-0 relative bg-black">
+      <PostsFilterNavSection />
+      <div className="flex items-center pt-px pb-0 px-[404.5px] relative self-stretch w-full flex-[0_0_auto]">
+        <div className="inline-flex flex-col min-w-[368px] max-w-[1080px] items-start relative flex-[0_0_auto]">
+          <div className="absolute w-[calc(100%_+_1px)] h-[calc(100%_+_1px)] -top-px -left-px border border-solid border-[#1f1f1f]" />
+          <PostsListSection />
+          <PostsContentRegionSection />
+          <CallToActionFooterSection />
+        </div>
+      </div>
+    </div>
+  );
+};
