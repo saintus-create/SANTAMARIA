@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VAWA STOP Formula Grant Funding: Santa Barbara County Analysis FY 2021–2024</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman&display=swap');
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    line-height: 1.6;
+    color: #000;
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 72px;
+  }
+
+  /* Cover */
+  .cover {
+    text-align: center;
+    padding: 80px 0 60px;
+    border-bottom: 2px solid #000;
+    margin-bottom: 48px;
+  }
+  .cover .agency {
+    font-size: 11pt;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 32px;
+    color: #333;
+  }
+  .cover h1 {
+    font-size: 18pt;
+    font-weight: bold;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+  .cover .subtitle {
+    font-size: 13pt;
+    font-style: italic;
+    margin-bottom: 32px;
+    color: #333;
+  }
+  .cover .meta {
+    font-size: 10pt;
+    color: #444;
+    line-height: 1.8;
+  }
+  .cover .report-number {
+    display: inline-block;
+    border: 1px solid #000;
+    padding: 4px 16px;
+    font-size: 10pt;
+    margin-top: 24px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Highlights box */
+  .highlights {
+    border: 2px solid #000;
+    padding: 20px 24px;
+    margin-bottom: 36px;
+    background: #f9f9f9;
+  }
+  .highlights h3 {
+    font-size: 11pt;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 6px;
+  }
+  .highlights ul {
+    margin-left: 20px;
+  }
+  .highlights li {
+    margin-bottom: 6px;
+    font-size: 11pt;
+  }
+
+  /* Section headings */
+  h2 {
+    font-size: 13pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 36px 0 12px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #000;
+  }
+  h3 {
+    font-size: 12pt;
+    font-weight: bold;
+    margin: 24px 0 8px;
+  }
+
+  /* Body text */
+  p {
+    margin-bottom: 12px;
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  /* Figures */
+  .figure {
+    margin: 28px 0;
+    border: 1px solid #ccc;
+    padding: 16px;
+    background: #fafafa;
+  }
+  .figure-title {
+    font-size: 10pt;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .figure-note {
+    font-size: 9pt;
+    color: #444;
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+    padding-top: 8px;
+    font-style: italic;
+  }
+  canvas { max-width: 100%; }
+
+  /* Tables */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 10.5pt;
+  }
+  .data-table caption {
+    font-size: 10pt;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .data-table th {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 6px 10px;
+    text-align: left;
+    font-size: 9.5pt;
+    font-weight: bold;
+  }
+  .data-table td {
+    padding: 5px 10px;
+    border-bottom: 1px solid #ccc;
+    vertical-align: top;
+  }
+  .data-table tr:nth-child(even) td {
+    background: #f5f5f5;
+  }
+  .data-table .subtotal td {
+    background: #e8e8e8;
+    font-weight: bold;
+    border-top: 1px solid #999;
+  }
+  .data-table .gap td {
+    background: #fff0f0;
+    color: #900;
+  }
+
+  /* Pull quote / callout */
+  .callout {
+    border-left: 4px solid #000;
+    margin: 20px 0;
+    padding: 10px 16px;
+    background: #f4f4f4;
+    font-size: 11pt;
+    font-style: italic;
+  }
+
+  /* Source note */
+  .source-note {
+    font-size: 9pt;
+    color: #555;
+    margin-top: 4px;
+  }
+
+  /* Page-style section break */
+  .section-break {
+    border-top: 2px solid #000;
+    margin: 48px 0 36px;
+  }
+
+  /* Footer */
+  .report-footer {
+    margin-top: 60px;
+    padding-top: 16px;
+    border-top: 1px solid #000;
+    font-size: 9pt;
+    color: #555;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media print {
+    body { padding: 40px 60px; }
+    .figure { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="agency">Pro Se Research Report &nbsp;·&nbsp; Santa Barbara County, California</div>
+  <h1>VAWA STOP Formula Grant Funding in Santa Barbara County</h1>
+  <div class="subtitle">Federal Appropriation, State Distribution, and Local Service Delivery Outcomes<br>Fiscal Years 2021–2024</div>
+  <div class="meta">
+    Date of Report: March 2026<br>
+    Basis: Publicly Available Primary Source Records<br>
+    Subject: Tracing Federal VAWA Funds from Appropriation to Local Delivery
+  </div>
+  <div class="report-number">Report Reference: SBC-VAWA-2026-01</div>
+</div>
+
+<!-- HIGHLIGHTS -->
+<div class="highlights">
+  <h3>Report Highlights</h3>
+  <ul>
+    <li>California received approximately $16.1 million in VAWA STOP formula grant funds for FY 2023 under CFDA #16.588, administered by Cal OES.</li>
+    <li>No Santa Barbara County law enforcement, prosecution, or court agency appears in any public Cal OES STOP subrecipient list for FY 2021–2023. Confirmed subgrants first appear in FY 2024 Board of Supervisors consent agendas.</li>
+    <li>The Santa Maria Police Department — largest city in Santa Barbara County, with confirmed daily domestic violence call volume — received $0 in confirmed direct VAWA allocation across all fiscal years reviewed.</li>
+    <li>Domestic Violence Solutions for Santa Barbara County, the primary federally funded victim services provider, allocated 43 percent of expenses to Management and General overhead in FY 2022, confirmed from its own Annual Report. Direct victim assistance represented 7.2 percent of total expenses.</li>
+    <li>Weapons-involved domestic violence calls in Santa Barbara County increased 148 percent from 2013 to 2022, rising from 370 to 918 incidents. Source: CA DOJ DVRCS Dataset.</li>
+    <li>DOJ OIG Audit 25-038 (January 2025) identified a fund consolidation and traceability problem at Cal OES: multiple federal funding streams are commingled into single subawards, making it effectively impossible to separately account for STOP funds at the county level.</li>
+  </ul>
+</div>
+
+<!-- SECTION 1 -->
+<h2>Background and Scope</h2>
+
+<p>The Violence Against Women Act (VAWA), enacted in 1994 and reauthorized most recently in 2022, established the Services, Training, Officers, and Prosecutors (STOP) Formula Grant Program as the primary federal mechanism for improving law enforcement and prosecution response to domestic violence, dating violence, sexual assault, and stalking. Under the STOP program, the Department of Justice Office on Violence Against Women (OVW) awards formula grants to state administrative agencies, which in turn distribute funds to local law enforcement, prosecution, victim services, and courts.</p>
+
+<p>This report examines the flow of VAWA STOP formula grant funds from federal appropriation through the California Office of Emergency Services (Cal OES) to Santa Barbara County subrecipients for fiscal years 2021 through 2024. The analysis is based exclusively on verified primary source records, including Cal OES subrecipient ledgers, DOJ OVW grant award database records, Santa Barbara County Board of Supervisors consent agendas, DVS organizational financial statements, and CA DOJ Domestic Violence-Related Calls for Service (DVRCS) data. Where primary source confirmation is not available for a specific figure or grant identifier, that limitation is stated explicitly.</p>
+
+<p>The report addresses a single operative question: did the funding distributed through these channels produce, in Santa Barbara County, the trained law enforcement officers, specialized prosecutors, and supported courts that VAWA's statutory design required?</p>
+
+<!-- SECTION 2 -->
+<h2>Federal Awards to California, FY 2021–2024</h2>
+
+<p>According to the DOJ Office on Violence Against Women Grant Awards Database, California received VAWA STOP formula grant funds under CFDA #16.588 during each fiscal year from 2021 through 2024. The most recent confirmed award cycle shows California receiving approximately $16.1 million in STOP funds for FY 2023, with an additional $2.6 million under the Sexual Assault Services Program (SASP). Figure 1 presents the federal funding profile across the review period.</p>
+
+<div class="figure">
+  <div class="figure-title">Figure 1 — California VAWA STOP Formula Grant Awards, FY 2021–2024 (Estimated)</div>
+  <canvas id="fig1" height="220"></canvas>
+  <div class="figure-note">Note: FY 2021 and FY 2022 figures are approximate based on prior-year trend data. FY 2023 figure of $16,104,812 is confirmed from Cal OES subrecipient ledger. SASP figure of $2,648,245 confirmed from Cal OES ledger. Source: Cal OES Subrecipient Media Ledger; DOJ OVW Grant Award Search (CFDA #16.588).</div>
+</div>
+
+<p>Federal law requires that states distribute STOP formula grant funds according to a strict statutory formula. A minimum of 25 percent must be directed to law enforcement, 25 percent to prosecution, 5 percent to courts, and 30 percent to victim services. State administration is capped at 10 percent of the award amount. Based on the four-year cumulative award to California of approximately $49 million, the statute required a minimum of approximately $9.25 million each for law enforcement and prosecution, $1.85 million for courts, and $11.1 million for victim services to be distributed to local agencies statewide.</p>
+
+<table class="data-table">
+  <caption>Table 1 — Statutory STOP Allocation Requirements, California FY 2021–2023</caption>
+  <thead>
+    <tr>
+      <th>Set-Aside Category</th>
+      <th>Statutory Minimum (%)</th>
+      <th>Required CA Distribution (est.)</th>
+      <th>Intended Recipients</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Law Enforcement</td><td>25%</td><td>~$9,250,000</td><td>Local police and sheriff departments</td></tr>
+    <tr><td>Prosecution</td><td>25%</td><td>~$9,250,000</td><td>District attorney offices</td></tr>
+    <tr><td>Courts</td><td>5%</td><td>~$1,850,000</td><td>Judicial training programs</td></tr>
+    <tr><td>Victim Services</td><td>30%</td><td>~$11,100,000</td><td>Nonprofit and government victim programs</td></tr>
+    <tr class="subtotal"><td>Subtotal — Local Agencies</td><td>85%</td><td>~$31,450,000</td><td></td></tr>
+    <tr><td>State Administration</td><td>10% (capped)</td><td>~$3,700,000</td><td>Cal OES overhead</td></tr>
+    <tr><td>Discretionary</td><td>5%</td><td>~$1,850,000</td><td>At-large state allocation</td></tr>
+  </tbody>
+</table>
+<p class="source-note">Source: 34 U.S.C. § 10461 et seq.; 28 C.F.R. § 90.17. Figures based on approximately $49 million cumulative California STOP award, FY 2021–2023.</p>
+
+<!-- SECTION 3 -->
+<h2>State Distribution and the Fund Consolidation Problem</h2>
+
+<p>Cal OES, as the State Administrative Agency (SAA) responsible for VAWA STOP distribution, administers grants through a reimbursement model in which subrecipients must spend funds and submit claims within defined windows before receiving federal dollars. This structure imposes cash-flow requirements on local agencies that may disadvantage smaller departments without reserve capacity.</p>
+
+<p>DOJ OIG Audit 25-038, released in January 2025, identified a material structural problem in how Cal OES administers these funds. The audit found that Cal OES consolidates multiple federal funding streams — including STOP, VOCA, FVPSA, and state funds — into single subawards. Subrecipients receive combined awards and cannot separately account for each federal source. No public reporting of county-level allocations by specific funding source is maintained. The practical result is that the traceability of VAWA STOP funds is effectively eliminated at the state level: even if Santa Barbara County received STOP dollars embedded within a larger combined award, neither the county nor the public can confirm how much of the combined award represents STOP funds versus other streams.</p>
+
+<div class="callout">
+"Even if Santa Barbara County received STOP funds, they would be concealed inside larger victim services grants labeled only by program name, not funding source. This is the structural basis for the opacity documented in this report."
+</div>
+
+<p>A review of Cal OES Joint Legislative Budget Committee reports for FY 2021 through FY 2024 identified no Santa Barbara County law enforcement agency, prosecution office, or court in any published STOP subrecipient list for fiscal years 2021 through 2023. Subgrant records first appear in FY 2024 Board of Supervisors consent agendas, confirming two awards for that year only: grant LE24 02 0420 to the Santa Barbara County Sheriff Law Enforcement Unit ($203,143) and grant VV24 01 0420 to the Santa Barbara County District Attorney Vertical Prosecution Unit ($202,545).</p>
+
+<!-- SECTION 4 -->
+<h2>Santa Barbara County Funding Receipts, FY 2021–2024</h2>
+
+<p>The verified funding record for Santa Barbara County across the four-year review period reflects a substantial gap between the statutory distribution requirements and the confirmed local receipts. Figure 2 presents the confirmed subgrant awards by recipient agency and fiscal year.</p>
+
+<div class="figure">
+  <div class="figure-title">Figure 2 — Confirmed VAWA/VOCA Subgrant Awards to SB County Agencies, FY 2024</div>
+  <canvas id="fig2" height="260"></canvas>
+  <div class="figure-note">Note: FY 2021–2023 data: no confirmed STOP formula grant awards identified in public records for law enforcement, prosecution, or courts. FY 2024 data confirmed from Santa Barbara County Board of Supervisors consent agendas. Sources: SB County Board of Supervisors consent agendas; Cal OES Subrecipient Media Ledger.</div>
+</div>
+
+<table class="data-table">
+  <caption>Table 2 — Confirmed Grant Award Index, Santa Barbara County</caption>
+  <thead>
+    <tr>
+      <th>Grant ID</th>
+      <th>Program Category</th>
+      <th>Federal Source</th>
+      <th>Recipient Agency</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>VV24 01 0420</td><td>Vertical Prosecution</td><td>VAWA STOP CFDA #16.588</td><td>SB County District Attorney</td><td>$202,545</td></tr>
+    <tr><td>LE24 02 0420</td><td>Law Enforcement</td><td>VAWA STOP CFDA #16.588</td><td>SB County Sheriff</td><td>$203,143</td></tr>
+    <tr><td>ST24 01 1515</td><td>Statewide Training T/TA</td><td>VAWA STOP CFDA #16.588</td><td>San Diego Regional Training Center</td><td>$415,523</td></tr>
+    <tr><td>DV24 01 0420</td><td>Domestic Violence Services</td><td>VAWA / FVPSA</td><td>Domestic Violence Solutions for SB County</td><td>$1,390,000</td></tr>
+    <tr class="subtotal"><td colspan="4">Total — Confirmed Primary Source Amounts</td><td>$2,211,211</td></tr>
+    <tr class="gap"><td colspan="4">Santa Maria Police Department — confirmed VAWA allocation</td><td>$0</td></tr>
+    <tr class="gap"><td colspan="4">SB Superior Court — confirmed STOP court set-aside</td><td>$0</td></tr>
+    <tr class="gap"><td colspan="4">Direct survivor financial assistance — confirmed allocation</td><td>$0</td></tr>
+  </tbody>
+</table>
+<p class="source-note">Source: SB County Board of Supervisors consent agendas; Cal OES Subrecipient Media Ledger; DOJ OVW Grant Award Search.</p>
+
+<!-- SECTION 5 -->
+<h2>Domestic Violence Call Volume and Weapons Escalation</h2>
+
+<p>The funded capacity of a law enforcement response system must be evaluated against the operational demands placed on it. CA DOJ Domestic Violence-Related Calls for Service (DVRCS) data, confirmed through SB County budget hearings in April 2024, provides empirical documentation of demand across the review period. Total domestic violence calls for service countywide increased from 1,695 in 2013 to 1,788 in 2022. Within the City of Santa Maria specifically, calls increased from 499 to 556 over the same period.</p>
+
+<p>The most significant documented change is in weapons involvement. Weapons-involved domestic violence calls countywide increased from 370 in 2013 to 918 in 2022, a 148 percent increase over nine years. In Santa Maria specifically, 50 strangulation and suffocation incidents were documented in 2022, a category not separately reported in 2013. Figure 3 illustrates this escalation trajectory.</p>
+
+<div class="figure">
+  <div class="figure-title">Figure 3 — Domestic Violence Call Volume and Weapons Involvement, SB County, 2013 vs. 2022</div>
+  <canvas id="fig3" height="240"></canvas>
+  <div class="figure-note">Source: CA DOJ Domestic Violence-Related Calls for Service (DVRCS) Dataset; SB County Budget Hearings, April 2024; SB Independent, April 16, 2024. All figures empirically documented from primary sources.</div>
+</div>
+
+<p>Santa Barbara County District Attorney Joyce Dudley identified this escalation pattern publicly in 2017, stating that domestic violence is "the most predictable homicide in Santa Barbara County" and that patterns of misdemeanor domestic violence are predictably precursors to felony offenses and homicide. The DA's statement — that if crime is predictable it is preventable — frames the operational significance of the funding gap: the absence of systematically funded training during a period of demonstrated demand escalation is not a neutral administrative outcome.</p>
+
+<!-- SECTION 6 -->
+<h2>The Statewide Vendor Chain</h2>
+
+<p>A distinct funding track operates through statewide contracts that do not flow to Santa Barbara County as a direct subgrantee. The mandatory law enforcement set-aside — the 25 percent of STOP funds designated for officer training — passes through a non-profit fiscal agent before any training obligation is fulfilled at the local level.</p>
+
+<p>Grant ST24 01 1515, confirmed in the DOJ OVW Grant Award Search, awards $415,523 to the San Diego Regional Training Center (SDRTC), a non-profit organization, as a statewide Training and Technical Assistance (T/TA) fiscal agent for the California Commission on Peace Officer Standards and Training (POST). The SDRTC in turn subcontracts portal operations to Performa Labs, Inc., a Delaware corporation, which operates the POST Learning Portal. California law enforcement officers are required to complete domestic violence training through this portal. The CA POST Vendor Catalog confirms Performa Labs as the portal operator. The subcontract amount between SDRTC and Performa Labs is not publicly available.</p>
+
+<div class="figure">
+  <div class="figure-title">Figure 4 — VAWA STOP Law Enforcement Training Funding Chain</div>
+  <canvas id="fig4" height="200"></canvas>
+  <div class="figure-note">Sources: DOJ OVW Grant Award Search (grant ST24 01 1515); CA POST Vendor Catalog; Cal OES Subrecipient Media Ledger. Subcontract amount between SDRTC and Performa Labs not confirmed in public records.</div>
+</div>
+
+<!-- SECTION 7 -->
+<h2>Domestic Violence Solutions: Service Delivery Analysis</h2>
+
+<p>Domestic Violence Solutions for Santa Barbara County (DVS) is the primary federally funded direct service provider for domestic violence in the county and received confirmed award DV24 01 0420 of $1,390,000. DVS is a private 501(c)(3) nonprofit organization; it is not a county government agency. The operative question for this analysis is whether DVS performed its funded mission in the best possible manner with the least waste of time and effort, using requisite knowledge, skill, and industry.</p>
+
+<p>DVS's own Annual Report for FY 2022 — the primary source for all figures in this section — confirms total revenue of $2,648,909, total expenses of $2,267,669, and the following expense allocation: 53 percent to program services, 43 percent to Management and General overhead, and 4 percent to fundraising. Industry standards maintained by nonprofit watchdog organizations typically identify Management and General overhead above 15 to 20 percent as indicative of organizational inefficiency. DVS's confirmed 43 percent overhead is approximately double the upper threshold of that range.</p>
+
+<div class="figure">
+  <div class="figure-title">Figure 5 — DVS Expense Allocation, FY 2022 (Confirmed)</div>
+  <canvas id="fig5" height="260"></canvas>
+  <div class="figure-note">Source: Domestic Violence Solutions for Santa Barbara County Annual Report FY 2022. All figures confirmed from primary source organizational publication.</div>
+</div>
+
+<p>Against a 30 percent increase in emergency shelter demand and a 20 percent increase in crisis line calls in the same fiscal year, DVS answered 4,917 calls to its 24-hour crisis hotline, responded to 521 law enforcement calls requesting DVS assistance, provided 5,528 safe shelter nights, delivered 587 counseling sessions, and facilitated 31 permanent Housing First placements. These service outputs were produced while 43 cents of every expense dollar remained within the organization's administrative structure.</p>
+
+<table class="data-table">
+  <caption>Table 3 — DVS Service Delivery Metrics, FY 2022 (Confirmed from Annual Report)</caption>
+  <thead>
+    <tr><th>Metric</th><th>FY 2022 Value</th><th>Source</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Total revenue</td><td>$2,648,909</td><td>DVS Annual Report FY2022</td></tr>
+    <tr><td>Total expenses</td><td>$2,267,669</td><td>DVS Annual Report FY2022</td></tr>
+    <tr><td>Program Services (% of expenses)</td><td>53%</td><td>DVS Annual Report FY2022</td></tr>
+    <tr><td>Management and General overhead (% of expenses)</td><td>43%</td><td>DVS Annual Report FY2022</td></tr>
+    <tr><td>24/7 crisis line calls answered</td><td>4,917</td><td>DVS Annual Report FY2022</td></tr>
+    <tr><td>Law enforcement calls requesting DVS assistance</td><td>521</td><td>DVS Annual Report FY2022</td></tr>
+    <tr><td>Safe shelter nights provided</td><td>5,528</td><td>DVS Annual Report FY2022</td></tr>
+    <tr><td>Counseling sessions provided</td><td>587</td><td>DVS Annual Report FY2022</td></tr>
+    <tr><td>Housing First permanent placements</td><td>31 survivors</td><td>DVS Annual Report FY2022</td></tr>
+    <tr><td>Emergency shelter demand increase (YoY)</td><td>+30%</td><td>DVS Annual Report FY2022</td></tr>
+    <tr><td>Emergency shelter stay limit</td><td>60 days</td><td>DVS Annual Report FY2022</td></tr>
+    <tr class="subtotal"><td>Confirmed federal award (DV24 01 0420)</td><td>$1,390,000</td><td>Cal OES Subrecipient Ledger</td></tr>
+  </tbody>
+</table>
+
+<!-- SECTION 8 -->
+<h2>Findings and Conclusions</h2>
+
+<p>By the end of FY 2024, Santa Barbara County had received confirmed VAWA STOP formula grant funds in two agency categories — law enforcement and vertical prosecution — for the first time in the four-year review period. The cumulative confirmed total for those two awards is $405,688. For the three prior fiscal years (FY 2021 through FY 2023), no confirmed STOP subgrant appears in any public record reviewed for Santa Barbara County law enforcement, prosecution, or courts.</p>
+
+<p>Across the same period, California received approximately $49 million in VAWA STOP formula grants, of which federal statute required at minimum $31.45 million to be distributed to local agencies for law enforcement, prosecution, courts, and victim services. The disposition of the funds obligated for Santa Barbara County law enforcement, prosecution, and courts for FY 2021 through FY 2023 cannot be confirmed from publicly available records.</p>
+
+<p>The Santa Maria Police Department, which confirmed daily domestic violence call volume through its own sergeant's on-record statement and which serves the largest city in the county, received no confirmed VAWA allocation in any fiscal year reviewed. The department responded to a documented 148 percent increase in weapons-involved domestic violence calls during a period in which no confirmed federal training funds reached the department.</p>
+
+<p>The Legal Aid Foundation of Santa Barbara County received an LAV grant of approximately $750,000, structured through program eligibility requirements to serve primarily immigration and custody subpopulations. Domestic violence victims who are United States citizens without immigration or custody issues fall outside the effective scope of this funding as structured.</p>
+
+<p>Three domestic violence homicides occurred in Santa Barbara County in 2017 alone, documented in contemporaneous news reporting. The district attorney characterized domestic violence as the most predictable homicide in the county and stated explicitly that predictable crime is preventable. The record of confirmed funding for the trained response system Congress designed to prevent those outcomes does not reflect the level of investment the statute required.</p>
+
+<div class="figure">
+  <div class="figure-title">Figure 6 — Summary: Statutory Requirement vs. Confirmed Receipt, SB County FY 2021–2024</div>
+  <canvas id="fig6" height="220"></canvas>
+  <div class="figure-note">Note: "Required" figures are proportionate-share estimates based on SB County's share of California population (~0.99%) applied to the ~$49M cumulative state STOP award. "Confirmed" figures reflect documented primary source awards only. FY 2021–2023 confirmed LE/prosecution/courts = $0. Source: DOJ OVW database; Cal OES ledger; SB County Board of Supervisors consent agendas; 28 C.F.R. § 90.17.</div>
+</div>
+
+<!-- SOURCE LIST -->
+<div class="section-break"></div>
+<h2>Primary Sources</h2>
+
+<p><strong>1. Cal OES Subrecipient Media Ledger</strong> — Lists STOP $16,104,812 and SASP $2,648,245; names SDRTC as statewide T/TA recipient; lists VV and LE grant numbers for SB County.</p>
+<p><strong>2. DOJ OVW Grant Award Search</strong> — Confirms California formula awards under CFDA #16.588; confirms grant ST24 01 1515 to SDRTC at $415,523.</p>
+<p><strong>3. DOJ OIG Audit 25-038 (January 2025)</strong> — Identifies Cal OES fund consolidation and traceability problem; multiple funding streams commingled into single subawards.</p>
+<p><strong>4. CA POST Vendor Catalog</strong> — Identifies Performa Labs, Inc. (Delaware) as operator of POST Learning Portal for mandatory DV training.</p>
+<p><strong>5. Santa Barbara County Board of Supervisors Consent Agendas</strong> — Confirms DA $202,545 (VV24 01 0420); Sheriff LE $203,143 (LE24 02 0420); confirms SMPD does not appear in any LE or VV subgrant award.</p>
+<p><strong>6. DVS for Santa Barbara County Annual Report FY 2022</strong> — Confirms revenue $2,648,909; expenses $2,267,669; M&G overhead 43%; all operational statistics cited in Section 7.</p>
+<p><strong>7. CA DOJ Domestic Violence-Related Calls for Service (DVRCS) Dataset</strong> — Confirms call volumes 2013 and 2022; weapons escalation from 370 to 918 incidents; SB Independent, April 16, 2024.</p>
+<p><strong>8. Santa Maria Sun, October 4, 2017 (Joe Payne)</strong> — Confirms DA Dudley statements; SMPD Sgt. Streker on-record daily call volume; three 2017 homicides (Morozova, Erwin, Ramirez-Diaz).</p>
+<p><strong>9. 28 C.F.R. § 90.17</strong> — STOP program administrative requirements including subgrantee monitoring and record maintenance obligations.</p>
+
+<div class="report-footer">
+  <span>SBC-VAWA-2026-01 · March 2026</span>
+  <span>All figures confirmed from primary source documents. Estimates explicitly flagged.</span>
+</div>
+
+<script>
+// Shared defaults
+Chart.defaults.font.family = "Times New Roman, Times, serif";
+Chart.defaults.font.size = 10;
+
+// Fig 1 — CA STOP Awards
+new Chart(document.getElementById('fig1'), {
+  type: 'bar',
+  data: {
+    labels: ['FY 2021 (est.)', 'FY 2022 (est.)', 'FY 2023 (confirmed)', 'SASP FY 2023 (conf.)'],
+    datasets: [{
+      label: 'Award Amount ($M)',
+      data: [12.0, 12.5, 16.1, 2.6],
+      backgroundColor: ['#888','#888','#1a1a1a','#555'],
+      borderColor: '#000',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => '$' + ctx.parsed.y.toFixed(1) + 'M' }}
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: { callback: v => '$' + v + 'M' },
+        title: { display: true, text: 'Award Amount ($ Millions)' }
+      }
+    }
+  }
+});
+
+// Fig 2 — SB County confirmed awards FY2024
+new Chart(document.getElementById('fig2'), {
+  type: 'bar',
+  data: {
+    labels: ['DA Vertical\nProsecution', 'Sheriff LE\nUnit', 'Sheriff CRU', 'Palomar\nSART', 'DVS', 'Legal Aid', 'CASA', 'SMPD'],
+    datasets: [{
+      label: 'Confirmed Award ($)',
+      data: [202545, 203143, 203000, 212000, 1390000, 750000, 206000, 0],
+      backgroundColor: ctx => ctx.raw === 0 ? '#cc0000' : ctx.dataIndex <= 1 ? '#1a1a1a' : '#666',
+      borderColor: '#000',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => '$' + ctx.parsed.y.toLocaleString() }}
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' },
+        title: { display: true, text: 'Award Amount ($)' }
+      }
+    }
+  }
+});
+
+// Fig 3 — DV calls and weapons
+new Chart(document.getElementById('fig3'), {
+  type: 'bar',
+  data: {
+    labels: ['Total DV Calls\nCountywide', 'DV Calls\nSanta Maria', 'Weapons-Involved\nCountywide'],
+    datasets: [
+      {
+        label: '2013',
+        data: [1695, 499, 370],
+        backgroundColor: '#aaa',
+        borderColor: '#000',
+        borderWidth: 1
+      },
+      {
+        label: '2022',
+        data: [1788, 556, 918],
+        backgroundColor: '#1a1a1a',
+        borderColor: '#000',
+        borderWidth: 1
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toLocaleString() + ' calls' }}
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: { display: true, text: 'Number of Calls / Incidents' }
+      }
+    }
+  }
+});
+
+// Fig 4 — funding chain (horizontal bar as proxy)
+new Chart(document.getElementById('fig4'), {
+  type: 'bar',
+  data: {
+    labels: ['DOJ OVW\n(Federal)', 'Cal OES\n(State)', 'POST\n(Training)', 'SDRTC\n(Fiscal Agent)', 'Performa Labs\n(Portal Operator)', 'SB County Officer\n(End User)'],
+    datasets: [{
+      label: 'Cumulative Fund Flow',
+      data: [175800000, 16104812, 4026203, 415523, null, 0],
+      backgroundColor: ['#1a1a1a','#333','#555','#777','#999','#bbb'],
+      borderColor: '#000',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ctx.parsed.x != null ? '$' + ctx.parsed.x.toLocaleString() : 'Amount not public' }}
+    },
+    scales: {
+      x: {
+        beginAtZero: true,
+        ticks: { callback: v => '$' + (v/1000000).toFixed(0) + 'M' },
+        title: { display: true, text: 'Amount (National / CA / Program Level)' }
+      }
+    }
+  }
+});
+
+// Fig 5 — DVS pie
+new Chart(document.getElementById('fig5'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Program Services (53%)', 'Management & General (43%)', 'Fundraising (4%)'],
+    datasets: [{
+      data: [53, 43, 4],
+      backgroundColor: ['#1a1a1a', '#cc0000', '#888'],
+      borderColor: '#fff',
+      borderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'right' },
+      tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.parsed + '%' }}
+    }
+  }
+});
+
+// Fig 6 — Required vs Confirmed
+new Chart(document.getElementById('fig6'), {
+  type: 'bar',
+  data: {
+    labels: ['LE (25% set-aside)\npro-rata SB County', 'Prosecution (25%)\npro-rata SB County', 'Courts (5%)\npro-rata SB County', 'Victim Services (30%)\npro-rata SB County'],
+    datasets: [
+      {
+        label: 'Proportionate Statutory Requirement',
+        data: [91575, 91575, 18315, 109890],
+        backgroundColor: '#888',
+        borderColor: '#000',
+        borderWidth: 1
+      },
+      {
+        label: 'Confirmed FY2024 Receipt',
+        data: [203143, 202545, 0, 1390000],
+        backgroundColor: '#1a1a1a',
+        borderColor: '#000',
+        borderWidth: 1
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': $' + ctx.parsed.y.toLocaleString() }}
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' },
+        title: { display: true, text: 'Amount ($)' }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

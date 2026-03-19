@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "VAWA STOP Grant Report"
+version = "1.0.0"
+id = "artifacts/vawa-report"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19109
+
+[services.development]
+run = "pnpm --filter @workspace/vawa-report run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/vawa-report", "run", "build" ]
+publicDir = "artifacts/vawa-report/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19109"
+BASE_PATH = "/"
